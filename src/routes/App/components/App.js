@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import '../styles/_app.scss';
+import { useTheme } from '../../../components/Theme';
 
 function App() {
-  const [isDark, setDark] = useState(false)
-  useEffect(() => {
-    
-  }, [isDark])
-
+  const { theme, setTheme } = useTheme()
   const handleDarkSwitch = function() {
-    if (!isDark) {
-      document.querySelector('html').className = 'dark-mode'
-    } else {
-      document.querySelector('html').className = ''
-    }
-    setDark(!isDark)
+    setTheme(theme.rootClassName ? 'light' : 'dark')
   }
 
   return (
@@ -27,7 +17,7 @@ function App() {
 
         {/* --The button that should toggle dark mode-- */}
         <button className="app__dark-mode-btn icon level-right">
-          <FontAwesomeIcon icon={!isDark ? faMoon : faSun} color={!isDark ? '#000' : '#FFA500'} onClick={handleDarkSwitch} />
+          <FontAwesomeIcon icon={theme.icon} color={theme.color} onClick={handleDarkSwitch} />
         </button>
 
       </div>
